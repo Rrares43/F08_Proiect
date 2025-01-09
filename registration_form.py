@@ -7,14 +7,14 @@ sheet = file.active
 
 def excel():
     
-    sheet.column_dimensions['A'].width = 50
-    sheet.column_dimensions['B'].width = 50
-    sheet.column_dimensions['C'].width = 50
-    sheet.column_dimensions['D'].width = 50
-    sheet.column_dimensions['E'].width = 50
-    sheet.column_dimensions['F'].width = 50
-    sheet.column_dimensions['G'].width = 50
-    sheet.column_dimensions['H'].width = 50
+    sheet.column_dimensions['A'].width = 100
+    sheet.column_dimensions['B'].width = 100
+    sheet.column_dimensions['C'].width = 100
+    sheet.column_dimensions['D'].width = 100
+    sheet.column_dimensions['E'].width = 100
+    sheet.column_dimensions['F'].width = 100
+    sheet.column_dimensions['G'].width = 100
+    sheet.column_dimensions['H'].width = 100
     
     sheet.cell(row=1, column=1).value = "Nume"
     sheet.cell(row=1, column=2).value = "Facultate"
