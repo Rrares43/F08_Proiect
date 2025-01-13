@@ -138,7 +138,7 @@ if __name__ == "__main__":
     
     window.columnconfigure(1, weight=1)
     
-    heading = Label(window, text="Student UPB", bg="yellow", font=("Comic Sans", 18))
+    heading = Label(window, text="Student UPB", bg="yellow", font=("Times New Roman", 24))
     nume = Label(window, text="Nume", bg="yellow")
     facultate = Label(window, text="Facultate", bg="yellow")
     serie = Label(window, text="Serie", bg="yellow")
