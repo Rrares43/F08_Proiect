@@ -4,7 +4,7 @@ from tkinter import messagebox
 from tkinter.simpledialog import askstring
 from tabulate import tabulate
 
-file = load_workbook("C:\\Users\\Admin\\Desktop\\Proiect PYTHON facultate\\data.xlsx")
+file = load_workbook("C:\\Users\\Admin\\Desktop\\F08\\data.xlsx")
 
 sheet = file.active
 
@@ -80,7 +80,7 @@ def insert():
         sheet.cell(row = current_row + 1, column= 7).value = telefon_spatiu.get()
         sheet.cell(row = current_row + 1, column= 8).value = nastere_spatiu.get()
         
-        file.save("C:\\Users\\Admin\\Desktop\\Proiect PYTHON facultate\\data.xlsx")
+        file.save("C:\\Users\\Admin\\Desktop\\F08\\data.xlsx")
 
         nume_spatiu.focus_set()
         
@@ -189,7 +189,7 @@ if __name__ == "__main__":
     submit = Button(window, text= "Submit", fg="black", bg="green", command=insert)
     submit.grid(row = 9, column=1, pady= 10)
     
-    view = Button(window, text="Inregistrari curente", fg="black", bg ="blue", command=view_people)
+    view = Button(window, text="Inregistrari curente", fg="black", bg ="light blue", command=view_people)
     view.grid(row=10, column=1, pady=10)
     
     reset_button = Button(window, text="Reset", fg = "black", bg= "red", command=reset)
