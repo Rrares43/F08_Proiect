@@ -1,5 +1,8 @@
 from openpyxl import *
 from tkinter import *
+from tkinter import messagebox
+from tkinter.simpledialog import askstring
+from tabulate import tabulate
 
 file = load_workbook("C:\\Users\\Admin\\Desktop\\Proiect PYTHON facultate\\data.xlsx")
 
@@ -7,14 +10,14 @@ sheet = file.active
 
 def excel():
     
-    sheet.column_dimensions['A'].width = 100
-    sheet.column_dimensions['B'].width = 100
-    sheet.column_dimensions['C'].width = 100
-    sheet.column_dimensions['D'].width = 100
-    sheet.column_dimensions['E'].width = 100
-    sheet.column_dimensions['F'].width = 100
-    sheet.column_dimensions['G'].width = 100
-    sheet.column_dimensions['H'].width = 100
+    sheet.column_dimensions['A'].width = 20
+    sheet.column_dimensions['B'].width = 20
+    sheet.column_dimensions['C'].width = 20
+    sheet.column_dimensions['D'].width = 20
+    sheet.column_dimensions['E'].width = 20
+    sheet.column_dimensions['F'].width = 20
+    sheet.column_dimensions['G'].width = 20
+    sheet.column_dimensions['H'].width = 20
     
     sheet.cell(row=1, column=1).value = "Nume"
     sheet.cell(row=1, column=2).value = "Facultate"
@@ -62,7 +65,7 @@ def insert():
        serie_spatiu.get() == "" and grupa_spatiu.get() == "" and 
        email_spatiu.get() == "" and adresa_spatiu.get() == "" and
        telefon_spatiu.get() == "" and nastere_spatiu.get() == ""):
-        print("Niciun input")
+        messagebox.showerror("Eroare", "Completati toate campurile!")
     
     else:
         current_row = sheet.max_row
@@ -82,6 +85,44 @@ def insert():
         nume_spatiu.focus_set()
         
         clear()
+
+def view_people():
+    view_people = Toplevel(window)
+    view_people.title("Inregistrari")
+    view_people.geometry("800x400")
+    
+    text_area = Text(view_people, wrap=NONE)
+    text_area.pack(expand=1, fill=BOTH)
+    
+    persoane = list(sheet.iter_rows(values_only=True))
+    if not persoane:
+        text_area.insert(1.0, "Nimic aici")
+        return
+    
+    tabel = tabulate(persoane, tablefmt="grid")
+    
+    text_area.insert(1.0, tabel)
+    text_area.config(state=DISABLED)
+
+def reset():
+    password = askstring("Aceasta optiune este rezervata adminului", "Introduceti parola")
+    if password != "Sendvis_Popeyes":
+        messagebox.showerror("Eroare", "Parola incorecta!")
+        return
+    
+    confirmare = messagebox.askyesno("Confirmare?", "Actiunea aceasta va sterge toate datele din baza")
+    if not confirmare:
+        return
+    
+    categorii = [cell.value for cell in sheet[1]]
+    
+    sheet.delete_rows(2, sheet.max_row)
+    
+    for col_num, value in enumerate(categorii, start=1):
+        sheet.cell(row=1, column=col_num).value = value
+    
+    file.save("data.xlsx")
+    messagebox.showinfo("Succes", "Toate datele au fost sterse!")
     
 if __name__ == "__main__":
     
@@ -145,7 +186,12 @@ if __name__ == "__main__":
     
     excel()
     
-    submit = Button(window, text= "Submit", fg="black", bg="red", command=insert)
+    submit = Button(window, text= "Submit", fg="black", bg="green", command=insert)
     submit.grid(row = 9, column=1, pady= 10)
     
+    view = Button(window, text="Inregistrari curente", fg="black", bg ="blue", command=view_people)
+    view.grid(row=10, column=1, pady=10)
+    
+    reset_button = Button(window, text="Reset", fg = "black", bg= "red", command=reset)
+    reset_button.grid(row = 11, column=1, pady=10)
     window.mainloop()
