@@ -186,7 +186,7 @@ if __name__ == "__main__":
     
     excel()
     
-    submit = Button(window, text= "Submit", fg="black", bg="green", command=insert)
+    submit = Button(window, text= "Submit", fg="black", bg="light green", command=insert)
     submit.grid(row = 9, column=1, pady= 10)
     
     view = Button(window, text="Inregistrari curente", fg="black", bg ="light blue", command=view_people)
